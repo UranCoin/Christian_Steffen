@@ -3,6 +3,7 @@
     --accent: #ffffff;
     --gray: #888;
     --dark-gray: #1a1a1a;
+    --accent-red: #e53e3e; /* Dezentes Rot */
 }
 
 * {
@@ -10,6 +11,10 @@
     padding: 0;
     box-sizing: border-box;
     cursor: none; /* For custom cursor */
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scrolling for all links */
 }
 
 body {
@@ -23,12 +28,12 @@ body {
 .cursor {
     width: 20px;
     height: 20px;
-    border: 1px solid var(--accent);
+    border: 1px solid var(--accent-red); /* Roter Rahmen standardmäßig */
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.1s ease;
+    transition: transform 0.1s ease, background-color 0.1s ease;
 }
 
 .container {
@@ -61,7 +66,7 @@ nav {
     font-size: 1.5rem;
 }
 
-.logo span { color: var(--gray); }
+.logo span { color: var(--accent-red); } /* Roter Punkt */
 
 .nav-links a {
     color: white;
@@ -70,6 +75,25 @@ nav {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-red); /* Roter Hover */
+}
+
+.btn-outline {
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    border-color: var(--accent-red);
+    background-color: var(--accent-red);
+    color: white !important;
 }
 
 /* Hero Section */
@@ -89,13 +113,29 @@ nav {
     text-transform: uppercase;
 }
 
+.typewriter {
+    font-size: 1.5rem;
+    color: var(--accent-red); /* Roter Untertitel */
+    margin-bottom: 20px;
+}
+
+/* Enlarged Profile Picture & Smoke Effect */
+.hero-img-container {
+    width: 400px; /* Vergrößert */
+    height: 400px; /* Vergrößert */
+    position: relative;
+    border-radius: 50%;
+    margin-top: 40px;
+    overflow: hidden; /* Important for smoke containment */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
 .hero-image {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     filter: grayscale(100%) contrast(1.2);
     border: 1px solid var(--dark-gray);
-    margin-top: 40px;
     transition: 0.5s;
 }
 
@@ -103,6 +143,27 @@ nav {
     filter: grayscale(0%);
     transform: scale(1.05);
 }
+
+.smoke-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0.05) 100%);
+    opacity: 0.1;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: smokePulse 5s infinite;
+}
+
+@keyframes smokePulse {
+    0% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(1.1); }
+    100% { opacity: 0.1; transform: scale(1); }
+}
+
+/* Add more smoke particle simulations if needed. Simple simulation for now. */
 
 /* Work Cards */
 .work-card {
@@ -115,7 +176,7 @@ nav {
 }
 
 .work-card:hover {
-    border-left: 10px solid white;
+    border-left: 10px solid var(--accent-red); /* Roter Seitenstreifen */
     transform: translateX(10px);
 }
 
@@ -126,13 +187,17 @@ nav {
     margin-bottom: 10px;
 }
 
+.work-card h5 {
+    color: var(--accent-red); /* Roter Jobtitel */
+}
+
 /* Section Title */
 .section-title {
     font-size: 3rem;
     margin-bottom: 50px;
 }
 
-.section-title span { color: var(--gray); }
+.section-title span { color: var(--accent-red); } /* Rotes Zeichen */
 
 /* Skills */
 .skills-wrapper {
@@ -149,17 +214,23 @@ nav {
 }
 
 .skill-pill:hover {
-    background: white;
-    color: black;
+    background: var(--accent-red); /* Roter Hover */
+    color: white;
 }
 
 /* Stats */
-.stats-section {
+.stats-sectioncontainer {
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 1) 100%);
+    margin-top: 100px;
+    padding-top: 50px;
+}
+
+.stats-inner {
     display: flex;
     justify-content: space-around;
     padding: 100px 0;
-    border-top: 1px solid var(--dark-gray);
-    border-bottom: 1px solid var(--dark-gray);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .stat-box {
@@ -178,10 +249,53 @@ nav {
     text-transform: uppercase;
 }
 
-/* Footer Link */
+/* Footer Link & Content */
+footer {
+    padding: 80px 20px;
+    background-color: #0c0c0c;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-content h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
 .main-link {
     font-size: clamp(1.5rem, 5vw, 4rem);
     color: white;
     text-decoration: none;
     font-weight: 900;
+    transition: 0.3s ease;
+}
+
+.main-link:hover {
+    color: var(--accent-red); /* Roter Hover */
+}
+
+.socials {
+    margin-top: 30px;
+}
+
+.socials a {
+    color: var(--gray);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.socials a:hover {
+    color: var(--accent-red); /* Roter Hover */
+}
+
+.copyright {
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-top: 40px;
 }
