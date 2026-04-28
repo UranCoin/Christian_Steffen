@@ -436,3 +436,51 @@ footer {
     left: 0;
     color: var(--accent-red);
 }
+
+.swiss-made {
+    margin-top: 50px;
+    color: var(--gray);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.swiss-cross {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--accent-red);
+    position: relative;
+    border-radius: 3px;
+}
+
+.swiss-cross::before {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 12px;
+    height: 4px;
+    top: 8px;
+    left: 4px;
+}
+
+.swiss-cross::after {
+    content: '';
+    position: absolute;
+    background-color: white;
+    width: 4px;
+    height: 12px;
+    top: 4px;
+    left: 8px;
+}
+
+.copyright {
+    color: #444;
+    font-size: 0.8rem;
+    margin-top: 15px; 
+}
