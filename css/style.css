@@ -1,20 +1,20 @@
 :root {
-    --bg: #000000; /* Reines Schwarz für besseres Blending */
+    --bg: #000000;
     --accent: #ffffff;
     --gray: #888;
     --dark-gray: #1a1a1a;
-    --accent-red: #e53e3e; /* Dezentes Rot */
+    --accent-red: #e53e3e;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none; /* For custom cursor */
+    cursor: none;
 }
 
 html {
-    scroll-behavior: smooth; /* Smooth scrolling for all links */
+    scroll-behavior: smooth;
     background-color: var(--bg);
 }
 
@@ -30,7 +30,7 @@ body {
 .cursor {
     width: 20px;
     height: 20px;
-    border: 1px solid var(--accent-red); /* Roter Rahmen */
+    border: 1px solid var(--accent-red);
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -68,7 +68,7 @@ nav {
     font-size: 1.5rem;
 }
 
-.logo span { color: var(--accent-red); } /* Roter Punkt */
+.logo span { color: var(--accent-red); }
 
 .nav-links a {
     color: white;
@@ -82,7 +82,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: var(--accent-red); /* Roter Hover */
+    color: var(--accent-red);
 }
 
 .btn-outline {
@@ -98,83 +98,93 @@ nav {
     color: white !important;
 }
 
-/* Hero Section - Stark angepasst für volle Breite und Blending */
+/* Hero Section - Neues Split-Layout (Links Text, Rechts Bild) */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    padding-top: 150px;
-    overflow: hidden;
+    padding-top: 80px; /* Offset für Navbar */
 }
 
-.hero-content {
-    max-width: 1000px;
+.hero-container {
+    max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left;
     z-index: 10;
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 10vw, 8rem);
+    font-size: clamp(3rem, 6vw, 5.5rem); /* Wieder eleganter und kleiner */
     font-weight: 900;
-    line-height: 0.9;
-    margin-bottom: 20px;
+    line-height: 1;
+    margin-bottom: 15px;
     text-transform: uppercase;
     color: var(--accent);
 }
 
 .typewriter {
-    font-size: clamp(1.2rem, 3vw, 2rem);
-    color: var(--accent-red); /* Roter Untertitel */
-    margin-bottom: 20px;
+    font-size: clamp(1.2rem, 2vw, 1.8rem); /* Perfekte Untertitel-Größe */
+    color: var(--accent-red);
+    margin-bottom: 25px;
     font-weight: 700;
 }
 
 .hero-subline {
     color: var(--gray);
-    font-size: clamp(1rem, 2vw, 1.3rem);
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.6;
 }
 
-/* Dynamischer Wolken-/Raucheffekt */
+/* Rechte Seite: Bild */
+.hero-visual {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: flex-end; /* Bild an den rechten Rand pinnen */
+    align-items: center;
+}
+
+/* Dynamischer Wolken-/Raucheffekt hinter/ums Bild */
 .hero-clouds {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    z-index: 1;
     pointer-events: none;
-    background: 
-        radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%),
-        linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%);
-    animation: cloudsMovement 30s infinite linear;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
+    animation: cloudsPulse 8s infinite alternate ease-in-out;
 }
 
-@keyframes cloudsMovement {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
-
-/* Bild-Container - Nahtlose volle Breite am unteren Rand */
-.hero-img-container {
-    width: 100%;
-    height: 40vh; /* Nimmt 40% der Viewport-Höhe ein */
-    z-index: 2;
-    position: relative;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
+@keyframes cloudsPulse {
+    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
 }
 
 .hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Passt das Bild rechteckig an */
-    filter: grayscale(100%) contrast(1.1); /* Schwarz-Weiss */
-    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
-    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh; /* Bild wird nie höher als der Bildschirm */
+    object-fit: contain; /* Kein Verzerren mehr! */
+    filter: grayscale(100%) contrast(1.1);
+    z-index: 2;
+    /* Maske: Lässt das Bild nach links (zum Text hin) sanft ins Schwarz übergehen */
+    mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
 }
 
 .scroll-indicator {
@@ -188,7 +198,27 @@ nav {
     z-index: 10;
 }
 
-/* Work Cards */
+/* Mobile Ansicht für Hero Section (Text oben, Bild unten) */
+@media (max-width: 900px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 60px;
+    }
+    .hero-text {
+        text-align: center;
+    }
+    .hero-visual {
+        justify-content: center;
+        width: 100%;
+    }
+    .hero-image {
+        mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%);
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%);
+    }
+}
+
+/* Restliches CSS (Work Cards, Skills, Stats) bleibt gleich */
 .work-card {
     background: var(--dark-gray);
     padding: 40px;
@@ -199,7 +229,7 @@ nav {
 }
 
 .work-card:hover {
-    border-left: 10px solid var(--accent-red); /* Roter Seitenstreifen */
+    border-left: 10px solid var(--accent-red);
     transform: translateX(10px);
 }
 
@@ -211,20 +241,18 @@ nav {
 }
 
 .work-card h5 {
-    color: var(--accent-red); /* Roter Jobtitel */
+    color: var(--accent-red);
     margin-bottom: 10px;
 }
 
-/* Section Title */
 .section-title {
     font-size: 3rem;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
 
-.section-title span { color: var(--accent-red); } /* Rotes Zeichen */
+.section-title span { color: var(--accent-red); }
 
-/* Skills */
 .skills-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -240,11 +268,10 @@ nav {
 }
 
 .skill-pill:hover {
-    background: var(--accent-red); /* Roter Hover */
+    background: var(--accent-red);
     color: white;
 }
 
-/* Stats */
 .stats-sectioncontainer {
     padding: 100px 0;
     background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(20,20,20,1) 50%, rgba(0,0,0,1) 100%);
@@ -275,7 +302,7 @@ nav {
     letter-spacing: 2px;
 }
 
-/* Footer Link & Content */
+/* Footer Link & Content - Größe reduziert */
 footer {
     padding: 100px 20px;
     background-color: #0c0c0c;
@@ -288,12 +315,12 @@ footer {
 }
 
 .footer-content h2 {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    margin-bottom: 30px;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: 20px;
 }
 
 .main-link {
-    font-size: clamp(1.5rem, 5vw, 4rem);
+    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Perfekte, nicht zu wuchtige Größe */
     color: white;
     text-decoration: none;
     font-weight: 900;
@@ -301,15 +328,15 @@ footer {
 }
 
 .main-link:hover {
-    color: var(--accent-red); /* Roter Hover */
+    color: var(--accent-red);
 }
 
 .socials {
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .social-icon {
-    font-size: 3rem; /* Grosses Icon */
+    font-size: 2.5rem;
     color: var(--gray);
     text-decoration: none;
     transition: color 0.3s ease, transform 0.3s ease;
@@ -317,7 +344,7 @@ footer {
 }
 
 .social-icon:hover {
-    color: var(--accent-red); /* Roter Hover */
+    color: var(--accent-red);
     transform: scale(1.1);
 }
 
