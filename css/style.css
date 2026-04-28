@@ -1,5 +1,5 @@
 :root {
-    --bg: #000000;
+    --bg: #000000; /* Reines Schwarz für perfektes Blending */
     --accent: #ffffff;
     --gray: #888;
     --dark-gray: #1a1a1a;
@@ -98,14 +98,14 @@ nav {
     color: white !important;
 }
 
-/* Hero Section - Neues Split-Layout (Links Text, Rechts Bild) */
+/* Hero Section */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding-top: 80px; /* Offset für Navbar */
+    padding-top: 80px;
 }
 
 .hero-container {
@@ -119,14 +119,17 @@ nav {
     gap: 40px;
 }
 
+/* --- ANPASSUNG 1: Text höher positioniert --- */
 .hero-text {
     flex: 1;
     text-align: left;
     z-index: 10;
+    position: relative;
+    margin-top: -60px; /* Schiebt den Text hoch in deine Blickrichtung */
 }
 
 .hero h1 {
-    font-size: clamp(3rem, 6vw, 5.5rem); /* Wieder eleganter und kleiner */
+    font-size: clamp(3rem, 6vw, 5.5rem);
     font-weight: 900;
     line-height: 1;
     margin-bottom: 15px;
@@ -135,7 +138,7 @@ nav {
 }
 
 .typewriter {
-    font-size: clamp(1.2rem, 2vw, 1.8rem); /* Perfekte Untertitel-Größe */
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
     color: var(--accent-red);
     margin-bottom: 25px;
     font-weight: 700;
@@ -152,8 +155,9 @@ nav {
     flex: 1;
     position: relative;
     display: flex;
-    justify-content: flex-end; /* Bild an den rechten Rand pinnen */
+    justify-content: flex-end;
     align-items: center;
+    overflow: visible; /* Wichtig für die Maske */
 }
 
 /* Dynamischer Wolken-/Raucheffekt hinter/ums Bild */
@@ -162,11 +166,11 @@ nav {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
+    width: 140%;
+    height: 140%;
     z-index: 1;
     pointer-events: none;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0) 60%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(0, 0, 0, 0) 65%);
     animation: cloudsPulse 8s infinite alternate ease-in-out;
 }
 
@@ -175,16 +179,32 @@ nav {
     100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
 }
 
+/* --- ANPASSUNG 2: Sauberes Ränder-Blending --- */
 .hero-image {
     max-width: 100%;
     height: auto;
-    max-height: 80vh; /* Bild wird nie höher als der Bildschirm */
-    object-fit: contain; /* Kein Verzerren mehr! */
+    max-height: 80vh;
+    object-fit: contain;
     filter: grayscale(100%) contrast(1.1);
     z-index: 2;
-    /* Maske: Lässt das Bild nach links (zum Text hin) sanft ins Schwarz übergehen */
-    mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 100%);
+    
+    /* RADIKALE ANPASSUNG DER MASKE: Alle 4 Seiten blenden sanft ins Schwarz */
+    -webkit-mask-image: 
+        radial-gradient(ellipse at center, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 75%), /* Weicher zentraler Fokus */
+        linear-gradient(to right, transparent 0%, black 25%), /* Linke Kante blenden */
+        linear-gradient(to left, transparent 0%, black 25%),  /* Rechte Kante blenden */
+        linear-gradient(to bottom, transparent 0%, black 15%), /* Obere Kante blenden */
+        linear-gradient(to top, transparent 0%, black 15%);    /* Untere Kante blenden */
+    
+    mask-image: 
+        radial-gradient(ellipse at center, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 75%),
+        linear-gradient(to right, transparent 0%, black 25%),
+        linear-gradient(to left, transparent 0%, black 25%),
+        linear-gradient(to bottom, transparent 0%, black 15%),
+        linear-gradient(to top, transparent 0%, black 15%);
+        
+    -webkit-mask-composite: source-in; /* Kombiniert alle Masken */
+    mask-composite: intersect; /* Nur dort anzeigen, wo alle Masken zutreffen */
 }
 
 .scroll-indicator {
@@ -198,7 +218,7 @@ nav {
     z-index: 10;
 }
 
-/* Mobile Ansicht für Hero Section (Text oben, Bild unten) */
+/* Mobile Ansicht */
 @media (max-width: 900px) {
     .hero-container {
         flex-direction: column;
@@ -207,18 +227,24 @@ nav {
     }
     .hero-text {
         text-align: center;
+        margin-top: 0; /* Auf Mobile zentriert */
     }
     .hero-visual {
         justify-content: center;
         width: 100%;
     }
     .hero-image {
-        mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%);
-        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 100%);
+        /* Mobile Maske: Oben/Unten härter blenden */
+        -webkit-mask-image: 
+            radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%),
+            linear-gradient(to top, transparent 0%, black 30%);
+        mask-image: 
+            radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%),
+            linear-gradient(to top, transparent 0%, black 30%);
     }
 }
 
-/* Restliches CSS (Work Cards, Skills, Stats) bleibt gleich */
+/* Restliches CSS bleibt gleich */
 .work-card {
     background: var(--dark-gray);
     padding: 40px;
@@ -302,7 +328,6 @@ nav {
     letter-spacing: 2px;
 }
 
-/* Footer Link & Content - Größe reduziert */
 footer {
     padding: 100px 20px;
     background-color: #0c0c0c;
@@ -320,7 +345,7 @@ footer {
 }
 
 .main-link {
-    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Perfekte, nicht zu wuchtige Größe */
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
     color: white;
     text-decoration: none;
     font-weight: 900;
