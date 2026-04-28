@@ -1,46 +1,51 @@
-// Initialize Scroll Animations
+// Initialize Scroll Animations (AOS)
 AOS.init({
-    duration: 1000,
-    once: false
+    duration: 1000, // Animation duration in ms
+    once: false, // Whether animation should happen only once - while scrolling down
+    mirror: true, // Whether elements should animate out while scrolling past them
 });
 
-// Custom Cursor Spielerei
+// Custom Mouse Cursor Spielerei
 const cursor = document.querySelector('.cursor');
 
 document.addEventListener('mousemove', e => {
+    // Smooth movement using requestAnimationFrame might be better, but this is simple
     cursor.style.top = e.clientY + 'px';
     cursor.style.left = e.clientX + 'px';
 });
 
 // Hover Effect on Links for Cursor
-document.querySelectorAll('a, .skill-pill, .work-card').forEach(link => {
+document.querySelectorAll('a, .skill-pill, .work-card, .social-icon').forEach(link => {
     link.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(3)';
-        cursor.style.backgroundColor = 'rgba(255,255,255,0.1)';
+        cursor.style.transform = 'scale(3)'; // Scale up cursor
+        cursor.style.backgroundColor = 'rgba(255,255,255,0.1)'; // Light white bg
         cursor.style.borderColor = 'transparent';
     });
     link.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)';
+        cursor.style.transform = 'scale(1)'; // Back to normal size
         cursor.style.backgroundColor = 'transparent';
-        cursor.style.borderColor = 'var(--accent-red)';
+        cursor.style.borderColor = 'var(--accent-red)'; // Red border again
     });
 });
 
-// Simple Typewriter Effect for Hero
+// Simple Typewriter Effect for Hero Subsection
 const text = document.querySelector('.typewriter');
-const originalText = text.innerHTML;
-text.innerHTML = '';
-let i = 0;
+if (text) {
+    const originalText = text.innerHTML;
+    text.innerHTML = '';
+    let i = 0;
 
-function typeWriter() {
-    if (i < originalText.length) {
-        text.innerHTML += originalText.charAt(i);
-        i++;
-        setTimeout(typeWriter, 50);
+    function typeWriter() {
+        if (i < originalText.length) {
+            text.innerHTML += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 70); // Typing speed
+        }
     }
-}
 
-window.onload = typeWriter;
+    // Start typing after a short delay
+    setTimeout(typeWriter, 500);
+}
 
 // Smooth Scrolling logic for menu links (Spielerei 2)
 document.querySelectorAll('nav .nav-links a[href^="#"]').forEach(anchor => {
@@ -51,10 +56,23 @@ document.querySelectorAll('nav .nav-links a[href^="#"]').forEach(anchor => {
         const targetElement = document.getElementById(targetId);
 
         if (targetElement) {
+            // Check if nav is fixed to adjust offset
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.offsetTop - navHeight;
+
             window.scrollTo({
-                top: targetElement.offsetTop,
+                top: targetPosition,
                 behavior: 'smooth'
             });
         }
     });
+});
+
+// Parallax movement for Hero clouds (Optional high-end feel)
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const clouds = document.querySelector('.hero-clouds');
+    if (clouds) {
+        clouds.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
 });

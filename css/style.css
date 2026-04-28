@@ -1,20 +1,21 @@
 :root {
-    --bg: #050505;
+    --bg: #000000; /* Reines Schwarz für besseres Blending */
     --accent: #ffffff;
     --gray: #888;
     --dark-gray: #1a1a1a;
-    --accent-red: #e53e3e; 
+    --accent-red: #e53e3e; /* Dezentes Rot */
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none; 
+    cursor: none; /* For custom cursor */
 }
 
 html {
-    scroll-behavior: smooth; 
+    scroll-behavior: smooth; /* Smooth scrolling for all links */
+    background-color: var(--bg);
 }
 
 body {
@@ -22,13 +23,14 @@ body {
     color: white;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Custom Cursor */
 .cursor {
     width: 20px;
     height: 20px;
-    border: 1px solid var(--accent-red); 
+    border: 1px solid var(--accent-red); /* Roter Rahmen */
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
@@ -47,14 +49,14 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 30px;
+    padding: 20px 40px;
     z-index: 100;
-    background: rgba(5, 5, 5, 0.8);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
 }
 
 .nav-inner {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -66,7 +68,7 @@ nav {
     font-size: 1.5rem;
 }
 
-.logo span { color: var(--accent-red); } 
+.logo span { color: var(--accent-red); } /* Roter Punkt */
 
 .nav-links a {
     color: white;
@@ -80,7 +82,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: var(--accent-red); 
+    color: var(--accent-red); /* Roter Hover */
 }
 
 .btn-outline {
@@ -96,86 +98,94 @@ nav {
     color: white !important;
 }
 
-/* Hero Section */
+/* Hero Section - Stark angepasst für volle Breite und Blending */
 .hero {
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
-    padding-top: 100px;
+    position: relative;
+    padding-top: 150px;
+    overflow: hidden;
 }
 
 .hero-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Zentriert alle Inhalte horizontal */
+    max-width: 1000px;
+    margin: 0 auto;
+    z-index: 10;
 }
 
 .hero h1 {
-    font-size: clamp(2.5rem, 8vw, 7rem);
+    font-size: clamp(3rem, 10vw, 8rem);
     font-weight: 900;
-    line-height: 1;
+    line-height: 0.9;
     margin-bottom: 20px;
     text-transform: uppercase;
+    color: var(--accent);
 }
 
 .typewriter {
-    font-size: 1.5rem;
-    color: var(--accent-red); 
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--accent-red); /* Roter Untertitel */
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
-/* Vergrößertes Profilbild & Rauch-Effekt */
+.hero-subline {
+    color: var(--gray);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+}
+
+/* Dynamischer Wolken-/Raucheffekt */
+.hero-clouds {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    background: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%),
+        linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,1) 100%);
+    animation: cloudsMovement 30s infinite linear;
+}
+
+@keyframes cloudsMovement {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* Bild-Container - Nahtlose volle Breite am unteren Rand */
 .hero-img-container {
+    width: 100%;
+    height: 40vh; /* Nimmt 40% der Viewport-Höhe ein */
+    z-index: 2;
     position: relative;
-    width: 450px; /* Großer Container für den Rauch */
-    height: 450px;
-    margin: 40px auto 0 auto; /* Absolut mittig */
+    bottom: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-}
-
-.smoke-effect {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 130%;
-    height: 130%;
-    border-radius: 50%;
-    /* Rötlich-weisser Nebel */
-    background: radial-gradient(circle, rgba(229, 62, 62, 0.15) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 70%);
-    filter: blur(30px);
-    z-index: 0;
-    animation: smokeAnim 6s infinite alternate ease-in-out;
-}
-
-@keyframes smokeAnim {
-    0% { transform: translate(-50%, -50%) scale(0.9) rotate(0deg); opacity: 0.5; }
-    100% { transform: translate(-50%, -50%) scale(1.1) rotate(15deg); opacity: 1; }
 }
 
 .hero-image {
-    position: relative;
-    z-index: 1;
-    width: 350px; /* Massiv vergrößert */
-    height: 350px;
-    object-fit: cover;
-    border-radius: 50%;
-    filter: grayscale(100%) contrast(1.2);
-    border: 2px solid var(--dark-gray);
-    box-shadow: 0 0 40px rgba(0,0,0,0.9);
-    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Passt das Bild rechteckig an */
+    filter: grayscale(100%) contrast(1.1); /* Schwarz-Weiss */
+    mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
 }
 
-.hero-image:hover {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-    border-color: var(--accent-red);
-    box-shadow: 0 0 60px rgba(229, 62, 62, 0.2);
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 10;
 }
 
 /* Work Cards */
@@ -189,7 +199,7 @@ nav {
 }
 
 .work-card:hover {
-    border-left: 10px solid var(--accent-red); 
+    border-left: 10px solid var(--accent-red); /* Roter Seitenstreifen */
     transform: translateX(10px);
 }
 
@@ -201,17 +211,18 @@ nav {
 }
 
 .work-card h5 {
-    color: var(--accent-red); 
-    margin-bottom: 15px;
+    color: var(--accent-red); /* Roter Jobtitel */
+    margin-bottom: 10px;
 }
 
 /* Section Title */
 .section-title {
     font-size: 3rem;
     margin-bottom: 50px;
+    text-transform: uppercase;
 }
 
-.section-title span { color: var(--accent-red); } 
+.section-title span { color: var(--accent-red); } /* Rotes Zeichen */
 
 /* Skills */
 .skills-wrapper {
@@ -225,25 +236,23 @@ nav {
     border: 1px solid var(--dark-gray);
     border-radius: 50px;
     transition: 0.3s;
+    font-weight: 500;
 }
 
 .skill-pill:hover {
-    background: var(--accent-red); 
+    background: var(--accent-red); /* Roter Hover */
     color: white;
-    border-color: var(--accent-red);
 }
 
 /* Stats */
 .stats-sectioncontainer {
-    background: linear-gradient(180deg, rgba(5, 5, 5, 0) 0%, rgba(5, 5, 5, 1) 100%);
-    margin-top: 50px;
-    padding-top: 50px;
+    padding: 100px 0;
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(20,20,20,1) 50%, rgba(0,0,0,1) 100%);
 }
 
 .stats-inner {
     display: flex;
     justify-content: space-around;
-    padding: 100px 0;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -256,18 +265,19 @@ nav {
     display: block;
     font-size: 2.5rem;
     font-weight: 900;
+    color: var(--accent);
 }
 
 .stat-box .label {
     color: var(--gray);
     font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 /* Footer Link & Content */
 footer {
-    padding: 80px 20px;
+    padding: 100px 20px;
     background-color: #0c0c0c;
     text-align: center;
 }
@@ -278,12 +288,12 @@ footer {
 }
 
 .footer-content h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 30px;
 }
 
 .main-link {
-    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-size: clamp(1.5rem, 5vw, 4rem);
     color: white;
     text-decoration: none;
     font-weight: 900;
@@ -291,27 +301,28 @@ footer {
 }
 
 .main-link:hover {
-    color: var(--accent-red); 
+    color: var(--accent-red); /* Roter Hover */
 }
 
 .socials {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
-.socials a {
+.social-icon {
+    font-size: 3rem; /* Grosses Icon */
     color: var(--gray);
     text-decoration: none;
-    margin: 0 10px;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
 }
 
-.socials a:hover {
-    color: var(--accent-red); 
+.social-icon:hover {
+    color: var(--accent-red); /* Roter Hover */
+    transform: scale(1.1);
 }
 
 .copyright {
-    color: var(--gray);
+    color: #555;
     font-size: 0.8rem;
-    margin-top: 40px;
+    margin-top: 60px;
 }
