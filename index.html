@@ -8,7 +8,7 @@
     
     <link rel="stylesheet" href="css/style.css">
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -25,6 +25,7 @@
                 <a href="#home">Startseite</a>
                 <a href="#über-mich">Über mich</a>
                 <a href="#erfahrung">Erfahrung</a>
+                <a href="#ausbildung">Ausbildung</a>
                 <a href="#fähigkeiten">Fähigkeiten</a>
                 <a href="#kontakt" class="btn-outline">Let's Talk</a>
             </div>
@@ -33,28 +34,34 @@
 
     <main>
         <section class="hero" id="home">
-            
             <div id="particles-js"></div>
-
             <div class="hero-container">
-                
                 <div class="hero-text" data-aos="fade-right">
                     <h1 class="glitch-text">Christian Steffen</h1>
                     <h2 class="typewriter">Softwareentwickler im Gesundheitswesen</h2>
                     <p class="hero-subline">Digitale Lösungen für eine gesündere Zukunft.<br>Minimalistisch. Präzise. Wirkungsvoll.</p>
                 </div>
-                
                 <div class="hero-visual" data-aos="fade-left" data-aos-delay="200">
                     <div class="hero-clouds"></div>
                     <img src="assets/profile.png" alt="Christian Steffen" class="hero-image">
                 </div>
-
             </div>
             <div class="scroll-indicator"></div>
         </section>
 
-        <section class="stats-sectioncontainer" id="über-mich" data-aos="fade-in">
-            <div class="stats-inner">
+        <section id="über-mich" class="container">
+            <h3 class="section-title" data-aos="fade-right">Über mich<span>/</span></h3>
+            
+            <div class="about-content" data-aos="fade-up">
+                <p class="lead-text">
+                    Als Applikationsentwickler mit einem starken Fundament in der Wirtschaftsinformatik verbinde ich technisches Know-how mit einem tiefen Verständnis für betriebswirtschaftliche Prozesse.
+                </p>
+                <p class="body-text">
+                    Mein beruflicher Werdegang ist unkonventionell und genau deshalb meine größte Stärke. Geprägt durch operative Führungserfahrung und Entscheidungsdruck als Oberleutnant in der Schweizer Armee, den direkten und lösungsorientierten Kundenkontakt im Detailhandel sowie anspruchsvolle IT-Projekte im Gesundheitswesen, gehe ich komplexe Probleme analytisch und strukturiert an. Ich stehe für saubere Software-Architekturen, hohe Code-Qualität und digitale Lösungen, die nicht nur funktionieren, sondern echten, messbaren Mehrwert bieten.
+                </p>
+            </div>
+
+            <div class="stats-inner" data-aos="fade-in" data-aos-delay="200">
                 <div class="stat-box">
                     <span class="number">Oberleutnant</span>
                     <span class="label">Führungserfahrung</span>
@@ -76,19 +83,101 @@
             <div class="work-card" data-aos="fade-up">
                 <div class="card-header">
                     <h4>Asparagus Engineering AG</h4>
-                    <span>Aug 2024 - Present</span>
+                    <span>Aug 2024 - Heute</span>
                 </div>
-                <h5>Junior Applikationsentwickler</h5>
-                <p>Entwicklung von Business-Applikationen für die Stadt Zürich & Migration von Legacy-Systemen auf moderne .NET/WPF Umgebungen.</p>
+                <h5>Junior Applikationsentwickler (Vollzeit)</h5>
+                <ul class="experience-list">
+                    <li>Konzeption und eigenständige Entwicklung interner Business-Applikationen (Ferientool, Spesentool, Mitarbeiter-Vorschlagswesen).</li>
+                    <li>Full-Stack-Entwicklung einer Ablöse-Applikation für die Stadt Zürich (von Datenbankmodellierung ERD über Mockups bis zur Programmierung).</li>
+                    <li>Software-Modernisierung für FIDUS Schweiz: Migration von Legacy-VB6-Applikationen auf WPF (.NET).</li>
+                    <li>Migration veralteter CMS-Systeme auf WordPress zur Performance-Optimierung.</li>
+                    <li>Weiterentwicklung des Einsatzmonitorings für Rettungsfahrzeuge des Kantonsspitals Winterthur.</li>
+                </ul>
             </div>
 
             <div class="work-card" data-aos="fade-up">
                 <div class="card-header">
-                    <h4>Kantonsspital Winterthur</h4>
-                    <span>2023 - 2024</span>
+                    <h4>Asparagus Engineering AG</h4>
+                    <span>Aug 2023 - Juli 2024</span>
                 </div>
-                <h5>Applikationsentwickler</h5>
-                <p>Funktionserweiterung des Einsatzmonitorings für Rettungsfahrzeuge.</p>
+                <h5>Applikationsentwickler (Praktikum)</h5>
+                <p>Einsatz von Visual Studio, C# und weiteren modernen Web-Technologien in praxisnahen Projekten.</p>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>VüCH AG</h4>
+                    <span>März 2022 - Juli 2023</span>
+                </div>
+                <h5>Sicherheitsdienste (Teilzeit)</h5>
+                <p>Sicherstellung von Schutz und Sicherheit unter Einhaltung strenger Vorgaben und Protokolle.</p>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>Schweizer Armee</h4>
+                    <span>Jan 2020 - Dez 2021</span>
+                </div>
+                <h5>Offizier / Oberleutnant (FU 104)</h5>
+                <ul class="experience-list">
+                    <li><strong>Mai 2021 - Dez 2021:</strong> Dienstzeit in Frauenfeld inkl. Beförderung zum Oberleutnant.</li>
+                    <li><strong>Jul 2020 - Mai 2021:</strong> Ausbildung zum Leutnant inklusive Praktikum.</li>
+                    <li><strong>Mai 2020 - Jul 2020:</strong> Ausbildung zum Wachtmeister.</li>
+                    <li><strong>Jan 2020 - Mai 2020:</strong> Ausbildung zum Soldaten (Ristl Rs 62/1).</li>
+                </ul>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>Ernst Hotz AG</h4>
+                    <span>Aug 2015 - Dez 2019</span>
+                </div>
+                <h5>Detailhandelsangestellter</h5>
+                <p>Langjährige Erfahrung im direkten Kundenkontakt sowie Abschluss der Ausbildungen zum Detailhandelsfachmann EFZ und Detailhandelsassistent EBA.</p>
+            </div>
+        </section>
+
+        <section id="ausbildung" class="container">
+            <h3 class="section-title" data-aos="fade-right">Ausbildung<span>/</span></h3>
+            
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>WISS Schulen für Wirtschaft Informatik Immobilien</h4>
+                    <span>Nov 2024 - Nov 2026</span>
+                </div>
+                <h5>Dipl. Wirtschaftsinformatiker HF</h5>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>Kalaidos Fachhochschule Schweiz</h4>
+                    <span>Okt 2025 - März 2026</span>
+                </div>
+                <h5>CAS IT-Management</h5>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>WISS Schulen für Wirtschaft Informatik Immobilien</h4>
+                    <span>Aug 2022 - Aug 2024</span>
+                </div>
+                <h5>Applikationsentwickler EFZ, Computer Science</h5>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>Höhere Kaderausbildung der Armee (HKA)</h4>
+                    <span>Okt 2020 - Nov 2021</span>
+                </div>
+                <h5>Oberleutnant, Fu Os</h5>
+            </div>
+
+            <div class="work-card" data-aos="fade-up">
+                <div class="card-header">
+                    <h4>Detailhandelsausbildungen</h4>
+                    <span>Aug 2015 - Aug 2019</span>
+                </div>
+                <h5>Detailhandelsfachmann EFZ & Detailhandelsassistent EBA</h5>
             </div>
         </section>
 
@@ -97,11 +186,13 @@
             <div class="skills-wrapper">
                 <div class="skill-pill" data-aos="zoom-in">C# / .NET</div>
                 <div class="skill-pill" data-aos="zoom-in">ASP.NET Core</div>
-                <div class="skill-pill" data-aos="zoom-in">SQL Server</div>
+                <div class="skill-pill" data-aos="zoom-in">ASP.NET MVC</div>
+                <div class="skill-pill" data-aos="zoom-in">Microsoft SQL Server</div>
                 <div class="skill-pill" data-aos="zoom-in">Entity Framework</div>
                 <div class="skill-pill" data-aos="zoom-in">REST-API</div>
                 <div class="skill-pill" data-aos="zoom-in">WPF</div>
                 <div class="skill-pill" data-aos="zoom-in">Syncfusion</div>
+                <div class="skill-pill" data-aos="zoom-in">Visual Studio</div>
             </div>
         </section>
     </main>
