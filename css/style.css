@@ -16,6 +16,9 @@
 html {
     scroll-behavior: smooth;
     background-color: var(--bg);
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 body {
@@ -23,6 +26,8 @@ body {
     color: white;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    width: 100%;
+    position: relative;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -96,6 +101,22 @@ nav {
     border-color: var(--accent-red);
     background-color: var(--accent-red);
     color: white !important;
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 101;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--accent);
 }
 
 .hero {
@@ -209,30 +230,6 @@ nav {
     height: 50px;
     background: rgba(255, 255, 255, 0.2);
     z-index: 10;
-}
-
-@media (max-width: 900px) {
-    .hero-container {
-        flex-direction: column;
-        text-align: center;
-        padding-top: 60px;
-    }
-    .hero-text {
-        text-align: center;
-        margin-top: 0;
-    }
-    .hero-visual {
-        justify-content: center;
-        width: 100%;
-    }
-    .hero-image {
-        -webkit-mask-image: 
-            radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%),
-            linear-gradient(to top, transparent 0%, black 30%);
-        mask-image: 
-            radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%),
-            linear-gradient(to top, transparent 0%, black 30%);
-    }
 }
 
 .work-card {
@@ -432,6 +429,7 @@ footer {
     pointer-events: none;
     z-index: 1;
     letter-spacing: -1vw;
+    white-space: nowrap;
 }
 
 .footer-container {
@@ -507,6 +505,7 @@ footer {
     text-decoration: none;
     position: relative;
     transition: 0.3s;
+    word-break: break-all;
 }
 
 .big-mail::after {
@@ -616,39 +615,17 @@ footer {
     transform: translateY(-5px);
 }
 
-@media (max-width: 768px) {
-    .footer-main {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .footer-info-grid {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .footer-bottom {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-    .hide-mobile {
-        display: none;
-    }
-}
-
-/* --- NEU: Ausbildung Timeline Design --- */
-
 .education-timeline {
     position: relative;
     padding-left: 40px;
     margin-top: 40px;
 }
 
-/* Die vertikale leuchtende Linie */
 .education-timeline::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 7px; /* Positioniert die Linie exakt unter die Punkte */
+    left: 7px;
     width: 2px;
     height: 100%;
     background: linear-gradient(to bottom, var(--accent-red) 0%, rgba(229, 62, 62, 0.05) 100%);
@@ -660,7 +637,6 @@ footer {
     cursor: none;
 }
 
-/* Der Punkt auf der Zeitachse */
 .timeline-dot {
     position: absolute;
     left: -40px;
@@ -729,57 +705,39 @@ footer {
     margin: 0;
 }
 
-@media (max-width: 600px) {
-    .time-header {
+@media (max-width: 900px) {
+    .hero-container {
         flex-direction: column;
+        text-align: center;
+        padding-top: 60px;
     }
-    .date-badge {
-        margin-top: 10px;
+    .hero-text {
+        text-align: center;
+        margin-top: 0;
     }
-    .timeline-content {
-        padding: 20px;
+    .hero-visual {
+        justify-content: center;
+        width: 100%;
     }
-}
-
-html, body {
-    overflow-x: hidden;
-    width: 100%;
-    position: relative;
-}
-
-.big-mail {
-    word-break: break-all; 
-}
-
-.footer-watermark {
-    white-space: nowrap;
-}
-
-.hamburger {
-    display: none;
-    cursor: pointer;
-    z-index: 101; 
-}
-
-.hamburger .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    background-color: var(--accent);
+    .hero-image {
+        -webkit-mask-image: 
+            radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%),
+            linear-gradient(to top, transparent 0%, black 30%);
+        mask-image: 
+            radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%),
+            linear-gradient(to top, transparent 0%, black 30%);
+    }
 }
 
 @media (max-width: 768px) {
     .hamburger {
         display: block;
     }
-
     .nav-links {
         position: fixed;
-        left: 100%; 
+        left: 100%;
         top: 0;
+        display: flex;
         flex-direction: column;
         background-color: rgba(5, 5, 5, 0.98);
         backdrop-filter: blur(15px);
@@ -792,21 +750,17 @@ html, body {
         z-index: 100;
         gap: 0;
     }
-
     .nav-links.active {
         left: 0;
     }
-
     .nav-links a {
         margin: 20px 0;
         font-size: 1.5rem;
         margin-left: 0;
     }
-
     .btn-outline {
         margin-top: 20px;
     }
-
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
@@ -818,9 +772,36 @@ html, body {
         transform: translateY(-8px) rotate(-45deg);
         background-color: var(--accent-red);
     }
-
     .stats-inner {
         flex-direction: column;
         gap: 40px;
+    }
+    .footer-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-info-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    .hide-mobile {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .time-header {
+        flex-direction: column;
+    }
+    .date-badge {
+        margin-top: 10px;
+    }
+    .timeline-content {
+        padding: 20px;
     }
 }
