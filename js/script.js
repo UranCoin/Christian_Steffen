@@ -143,3 +143,9 @@ if (document.getElementById('particles-js')) {
         "retina_detect": true
     });
 }
+
+const footer = document.querySelector('footer');
+document.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    footer.style.background = `radial-gradient(circle at ${clientX}px ${clientY}px, rgba(229, 62, 62, 0.04) 0%, rgba(0,0,0,1) 50%)`;
+});
