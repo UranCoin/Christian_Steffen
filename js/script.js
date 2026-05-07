@@ -5,11 +5,9 @@ AOS.init({
     mirror: true, // Whether elements should animate out while scrolling past them
 });
 
-// Custom Mouse Cursor Spielerei
 const cursor = document.querySelector('.cursor');
 
 document.addEventListener('mousemove', e => {
-    // Smooth movement using requestAnimationFrame might be better, but this is simple
     cursor.style.top = e.clientY + 'px';
     cursor.style.left = e.clientX + 'px';
 });
@@ -17,14 +15,14 @@ document.addEventListener('mousemove', e => {
 // Hover Effect on Links for Cursor
 document.querySelectorAll('a, .skill-pill, .work-card, .social-icon').forEach(link => {
     link.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'scale(3)'; // Scale up cursor
-        cursor.style.backgroundColor = 'rgba(255,255,255,0.1)'; // Light white bg
+        cursor.style.transform = 'scale(3)'; 
+        cursor.style.backgroundColor = 'rgba(255,255,255,0.1)'; 
         cursor.style.borderColor = 'transparent';
     });
     link.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'scale(1)'; // Back to normal size
+        cursor.style.transform = 'scale(1)'; 
         cursor.style.backgroundColor = 'transparent';
-        cursor.style.borderColor = 'var(--accent-red)'; // Red border again
+        cursor.style.borderColor = 'var(--accent-red)';
     });
 });
 
@@ -39,11 +37,10 @@ if (text) {
         if (i < originalText.length) {
             text.innerHTML += originalText.charAt(i);
             i++;
-            setTimeout(typeWriter, 70); // Typing speed
+            setTimeout(typeWriter, 70);
         }
     }
 
-    // Start typing after a short delay
     setTimeout(typeWriter, 500);
 }
 
@@ -167,3 +164,29 @@ if (hamburger && navLinks) {
         });
     });
 }
+
+const sections = document.querySelectorAll("section, footer");
+const navItems = document.querySelectorAll(".nav-links a");
+
+function updateNav() {
+    let current = "";
+    
+    sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        
+        if (window.scrollY >= sectionTop - 250) {
+            current = section.getAttribute("id");
+        }
+    });
+
+    navItems.forEach((item) => {
+        item.classList.remove("active");
+        if (current && item.getAttribute("href").includes(current)) {
+            item.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", updateNav);
+
+updateNav();
