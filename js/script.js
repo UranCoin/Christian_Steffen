@@ -1,4 +1,3 @@
-// Initialize Scroll Animations (AOS)
 AOS.init({
     duration: 1000, // Animation duration in ms
     once: false, // Whether animation should happen only once - while scrolling down
